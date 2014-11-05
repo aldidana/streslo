@@ -29,6 +29,17 @@ if(Meteor.isClient) {
 		})
 	}
 
+	Template.body.events({
+		"submit .new-task": function (event) {
+			var text = event.target.text.value;
+			Boards.insert({
+				judul: text
+			})
+			event.target.text.value = "";
+			return false;
+		}
+	})
+
 	Template.boards.events({
 		"click .delete": function() {
 			Boards.remove(this._id);
