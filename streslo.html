@@ -1,0 +1,27 @@
+<head>
+	<title>Streslo</title>
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<h1 class="text-center">Meteor Day</h1>
+			<form class="new-task">
+				<input type="text" name="text" placehodler="isi disini" />
+			</form>
+		</header>
+		{{> boards}}
+	</div>
+</body>
+
+<template name="boards">
+	<ul id="boards">
+			{{#each boards}}
+				<li class="board">
+					{{judul}}
+					<button class="delete">&times;</button>
+				</li>
+
+			{{/each}}
+	</ul>
+</template>
