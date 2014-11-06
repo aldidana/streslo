@@ -1,12 +1,14 @@
 Boards = new Mongo.Collection('boards')
 
 if(Meteor.isClient) {
+	Meteor.subscribe("tampil");
 
 	Template.boards.helpers({
 		boards: function() {
 			return Boards.find({}, {sort: {order: 1}})
 		}
 	})
+}
 
 	Template.boards.rendered = function() {
 		this.$('#boards').sortable({
@@ -48,6 +50,11 @@ if(Meteor.isClient) {
 } 
 
 if(Meteor.isServer) {
+	// publish
+	Meteor.publish("tampil", function () {
+		return Boards.find({rahasia : false});
+	});
+
 	Meteor.startup(function() {
 		if(Boards.find({}).count() == 0) {
 			for (var i = 1; i<=5; i++) {
@@ -57,5 +64,5 @@ if(Meteor.isServer) {
 				});
 			}
 		}
-	});
+	});	
 }
